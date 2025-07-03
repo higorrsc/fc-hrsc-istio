@@ -1,3 +1,4 @@
 k3d 5.8.3
 kubectl 1.33.1
 golang 1.24.4
+istioctl 1.26.2
