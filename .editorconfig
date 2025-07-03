@@ -1,0 +1,64 @@
+# EditorConfig para projeto com K3D, Go, Makefile
+
+root = true
+
+# Arquivos Go
+[*.go]
+indent_style = tab
+tab_width = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Arquivos YAML (K3D, Kubernetes configs)
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Arquivos Dockerfile
+[Dockerfile*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Arquivos Makefile
+[Makefile]
+indent_style = tab
+tab_width = 4
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = false
+
+# Arquivos Markdown e README
+[*.md]
+trim_trailing_whitespace = false
+insert_final_newline = true
+end_of_line = lf
+charset = utf-8
+
+# Arquivos JSON
+[*.json]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Arquivos Shell Script
+[*.sh]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
