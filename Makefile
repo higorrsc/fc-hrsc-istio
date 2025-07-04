@@ -4,3 +4,5 @@ context:
 	kubectl config use-context k3d-k3s-default
 istio-default-profile:
 	istioctl install -y
+istio-injection:
+	kubectl label namespace default istio-injection=enabled
