@@ -12,3 +12,5 @@ istio-addons:
 	kubectl apply -f https://raw.githubusercontent.com/istio/istio/refs/heads/master/samples/addons/kiali.yaml
 	kubectl apply -f https://raw.githubusercontent.com/istio/istio/refs/heads/master/samples/addons/loki.yaml
 	kubectl apply -f https://raw.githubusercontent.com/istio/istio/refs/heads/master/samples/addons/prometheus.yaml
+nginx-loadbalancer:
+	while true; do curl http://localhost:8000; echo; sleep 0.5; done;
