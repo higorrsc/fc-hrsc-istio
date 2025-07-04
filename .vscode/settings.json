@@ -2,9 +2,13 @@
   "cSpell.words": [
     "coverprofile",
     "dylib",
+    "fortio",
+    "Fortio",
     "istio",
     "istioctl",
+    "Kiali",
     "loadbalancer",
+    "loglevel",
     "nginx"
   ]
 }
