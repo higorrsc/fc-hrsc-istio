@@ -5,6 +5,10 @@
 # O alvo 'help' será executado se você rodar 'make' sem argumentos.
 DEFAULT_GOAL := help
 
+# Define um tempo padrão para o teste de carga.
+# Pode ser sobrescrito na linha de comando, ex: make istio-fortio-load-test TIME=60s
+TIME ?= 200s
+
 # --- Configuração do Cluster e Istio ---
 
 # Cria um alvo "guarda-chuva" para configurar tudo com um só comando: make all
@@ -53,13 +57,10 @@ istio-fortio: setup-istio
 # Executa o teste de carga com o Fortio.
 # Depende do Fortio estar implantado.
 istio-fortio-load-test: istio-fortio
-	@echo "--- ⚡ Iniciando teste de carga com Fortio... ---"
-	# Busca o nome do pod AQUI, no momento da execução, garantindo que ele exista.
-	# Usamos uma variável de shell ($$POD_NAME) em vez de uma variável do make.
-	# O '$$' é para escapar o '$' e passá-lo para o shell.
+	@echo "--- ⚡ Iniciando teste de carga com Fortio por $(TIME)... ---"
 	@POD_NAME=$$(kubectl get pods -l app=fortio -o 'jsonpath={.items[0].metadata.name}'); \
 	echo "Executando teste no pod: $$POD_NAME"; \
-	kubectl exec "$$POD_NAME" -c fortio -- fortio load -c 2 -qps 0 -t 200s -loglevel Warning http://nginx-service:8000
+	kubectl exec "$$POD_NAME" -c fortio -- fortio load -c 2 -qps 0 -t $(TIME) -loglevel Warning http://nginx-service:8000
 
 # Este alvo é um loop infinito para gerar carga manualmente.
 # É bom avisar o usuário que ele precisa ser interrompido com Ctrl+C.
