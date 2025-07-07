@@ -9,6 +9,11 @@ DEFAULT_GOAL := help
 # Pode ser sobrescrito na linha de comando, ex: make istio-fortio-load-test TIME=60s
 TIME ?= 200s
 
+# Define a quantidade padrão para o teste de circuit-breaker.
+# Pode ser sobrescrito na linha de comando, ex: make istio-fortio-load-test CALLS=10
+CALLS ?= 200
+
+
 # --- Configuração do Cluster e Istio ---
 
 # Cria um alvo "guarda-chuva" para configurar tudo com um só comando: make all
@@ -61,6 +66,14 @@ istio-fortio-load-test: istio-fortio
 	@POD_NAME=$$(kubectl get pods -l app=fortio -o 'jsonpath={.items[0].metadata.name}'); \
 	echo "Executando teste no pod: $$POD_NAME"; \
 	kubectl exec "$$POD_NAME" -c fortio -- fortio load -c 2 -qps 0 -t $(TIME) -loglevel Warning http://nginx-service:8000
+
+# Executa o teste de circuit breaker com o Fortio.
+# Depende do Fortio estar implantado.
+istio-fortio-circuit-breaker: istio-fortio
+	@echo "--- ⚡ Iniciando teste de circuit breaker com Fortio... ---"
+	@POD_NAME=$$(kubectl get pods -l app=fortio -o 'jsonpath={.items[0].metadata.name}'); \
+	echo "Executando teste no pod: $$POD_NAME"; \
+	kubectl exec "$$POD_NAME" -c fortio -- fortio load -c 2 -qps 0 -n $(CALLS) -loglevel Warning http://servicex-service
 
 # Este alvo é um loop infinito para gerar carga manualmente.
 # É bom avisar o usuário que ele precisa ser interrompido com Ctrl+C.
