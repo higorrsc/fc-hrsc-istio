@@ -6,6 +6,7 @@
     "Fortio",
     "istio",
     "istioctl",
+    "istiod",
     "Kiali",
     "loadbalancer",
     "loglevel",
