@@ -8,8 +8,10 @@
     "istioctl",
     "istiod",
     "Kiali",
+    "ldflags",
     "loadbalancer",
     "loglevel",
-    "nginx"
+    "nginx",
+    "servicex"
   ]
 }
