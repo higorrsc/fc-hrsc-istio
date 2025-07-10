@@ -24,17 +24,19 @@ metadata:
 
 spec:
   hosts:
-    - nginx-service
+    - "*"
+  gateways:
+    - ingress-gateway-k3s
   http:
     - route:
         - destination:
             host: nginx-service
             subset: v1
-          weight: 0
+          weight: 50
         - destination:
             host: nginx-service
             subset: v2
-          weight: 100
+          weight: 50
 ---
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
